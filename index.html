@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>test</title>
+		<!-- Google Tag Manager -->
+		<script>
+			(function (w, d, s, l, i) {
+				w[l] = w[l] || [];
+				w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+				var f = d.getElementsByTagName(s)[0],
+					j = d.createElement(s),
+					dl = l != 'dataLayer' ? '&l=' + l : '';
+				j.async = true;
+				j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+				f.parentNode.insertBefore(j, f);
+			})(window, document, 'script', 'dataLayer', 'GTM-KM8B9DQD');
+		</script>
+		<!-- End Google Tag Manager -->
+	</head>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-KRXW89KWDK"></script>
+	<script>
+		window.addEventListener('message', (event) => {
+			if (event.data === 'getClientId') {
+				const gaCookie = document.cookie.split('; ').find((row) => row.startsWith('_ga='));
+				console.log('en front capturo gaCookie ', gaCookie);
+				if (gaCookie) {
+					const parts = gaCookie.split('.');
+					const clientId = parts.length >= 4 ? `${parts[2]}.${parts[3]}` : null;
+					event.source.postMessage({ clientId }, event.origin);
+				}
+			}
+
+			if (event.data && event.data.type === 'eventoAnalytics') {
+				console.log('📊 Evento recibido desde WebChat:', event.data);
+
+				window.dataLayer.push({
+					event: 'form_interaction',
+					form_name: 'Formulario Chat',
+					form_step: 'step_2',
+					department: 'Quiero resincribirme',
+					chat_status: 'chat iniciado',
+					client_id: '123456789',
+				});
+				alert('Evento enviado a dataLayer'); // Solo para pruebas
+
+				console.log(`✅ Evento '${event.data.eventName}' enviado a Google Analytics.`);
+			}
+		});
+
+		function enviarEvento() {
+			window.dataLayer.push({
+				event: 'form_interaction',
+				form_name: 'Formulario Chat',
+				form_step: 'step_2',
+				department: 'Quiero resincribirme',
+				chat_status: 'chat iniciado',
+				client_id: '123456789',
+			});
+			alert('Evento enviado a dataLayer'); // Solo para pruebas
+		}
+		
+		document.addEventListener("DOMContentLoaded", function() {
+		    var btn = document.getElementById("startButton");
+		    
+		    if (btn) {
+		        btn.addEventListener("click", function() {
+		            var chatFrame = null;
+		
+		            // Buscar el iframe que contiene inConcert.*
+		            for (var i = 0; i < window.frames.length; i++) {
+		                if (window.frames[i].inConcert) {
+		                    chatFrame = window.frames[i];
+		                    break;
+		                }
+		            }
+		
+		            // Si encontramos el iframe, llamamos a openChat
+		            if (chatFrame && chatFrame.inConcert && chatFrame.inConcert.E1AB3590681AFFCBA7DEC246DE17ADDE) {
+		                chatFrame.inConcert.E1AB3590681AFFCBA7DEC246DE17ADDE.openChat();
+		            } else {
+		                console.error("No se encontró la función openChat en el iframe.");
+		            }
+		        });
+		    } else {
+		        console.error("El botón #startButton no existe en el DOM.");
+		    }
+		});
+
+
+		
+	</script>
+
+	<body>
+		<!-- Google Tag Manager (noscript) -->
+		<noscript
+			><iframe
+				src="https://www.googletagmanager.com/ns.html?id=GTM-KM8B9DQD"
+				height="0"
+				width="0"
+				style="display: none; visibility: hidden"
+			></iframe
+		></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+		<!-- Botón para invocar el evento -->
+		<button onclick="enviarEvento()">Enviar Evento</button>
+
+		<button id="startButton">Abrir Chat</button>
+
+		<!-- Script para el chat -->
+
+		<script type='text/javascript'>
+  (function() {
+    var proto  = document.location.protocol || 'http:';
+    var node   = document.createElement('script');
+    node.type  = 'text/javascript';
+    node.async = true;
+    node.src   = proto +  '//webchat-cls-laureate-unitec.i6.inconcert.cloud/v3/click_to_chat?token=9B048C6AF0CAFA431243E144BC4D440F';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(node, s);
+  })();
+</script>
+
+	</body>
+</html>
